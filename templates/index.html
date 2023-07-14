@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Image Classification</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Space Image Classification</h1>
+    </header>
+
+    <section class="upload-section">
+        <h2>Select an Image to Classify</h2>
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <label for="file-input" class="custom-file-upload">
+                <input type="file" name="file" id="file-input" accept="image/*">
+                Choose File
+            </label>
+            <button type="submit">Classify</button>
+        </form>
+    </section>
+
+    <section class="result-section">
+        {% if prediction %}
+            <h2>Prediction:</h2>
+            <p class="prediction">{{ prediction }}</p>
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='uploads/' + selected_file) }}" alt="Uploaded Image" id="preview-image">
+            </div>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Space Image Classification. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
